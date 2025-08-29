@@ -1,4 +1,4 @@
-name:  'Installation Ansible' 
+name:  'Install Ansible' 
 
 on:
   workflow_dispatch:
