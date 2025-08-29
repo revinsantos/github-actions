@@ -35,21 +35,10 @@ jobs:
             echo "ip.txt is empty!"
           fi
   
-      - name: Wait up to 3 minutes for SSH
-        run: |
-          for ip in $(cat /home/kcluser25/ip.txt); do
-            echo "Waiting for SSH on $ip..."
-            timeout=180
-            waited=0
-            until ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -q kcluser25@$ip 'echo ok' 2>/dev/null; do
-              sleep 5
-              waited=$((waited + 5))
-              echo "Still waiting for $ip... (${waited}s)"
-              if [ $waited -ge $timeout ]; then
-                echo "Timeout reached waiting for $ip"
-                exit 1
-              fi
-            done
-            echo "SSH is up on kcluser25@$ip"
-          done
 
+      - name: Run Ansible Playbook
+        run: |
+          cd /home/kcluser25
+          ansible-playbook -i inventory playbook1-adduser.yaml --become
+          
+   
