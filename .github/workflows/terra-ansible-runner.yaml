@@ -20,7 +20,7 @@ jobs:
             cd /home/kcluser25
             terraform init
             terraform apply --auto-approve
-            terraform output external_ip  > ip.txt
+            terraform output instance_public_ip  > ip.txt
             echo "" >> ip.txt 
 
       - name: Prepare Ansible inventory
